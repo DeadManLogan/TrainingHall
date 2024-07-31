@@ -202,5 +202,100 @@ def exercise_8():
     win.getMouse()
     win.close()
 
+def exercise_9():
+    win = GraphWin ("Exercise_9", 500, 500)
+    win.setCoords(-10, -10, 10, 10)
 
-exercise_8()
+    start_point = win.getMouse()
+    end_point = win.getMouse()
+
+    rect = Rectangle(start_point, end_point)
+    rect.draw(win)
+
+    width = abs(start_point.getX() - end_point.getX())
+    length = abs(start_point.getY() - end_point.getY())
+    area = length*width
+    perimeter = 2*(length + width)
+    
+    result = Text(Point(2, 2), f'Area: {area} Perimeter: {perimeter}')
+    result.draw(win)
+
+    win.getMouse()
+    win.close()
+
+def line_length(start_point_x, start_point_y, end_point_x, end_point_y):
+    dx = end_point_x - start_point_x
+    dy = end_point_y - start_point_y
+    length = round(math.sqrt(dx**2 + dy**2), 1)
+
+    return length
+
+
+def exercise_10():
+    win = GraphWin ("Exercise_10", 500, 500)
+    win.setCoords(-10, -10, 10, 10)
+
+    point1 = win.getMouse()
+    point2 = win.getMouse()
+    point3 = win.getMouse()
+
+    line_1_2 = Line(point1, point2)
+    line_1_2.draw(win)
+    line_1_3 = Line(point1, point3)
+    line_1_3.draw(win)
+    line_2_3 = Line(point2, point3)
+    line_2_3.draw(win)
+
+    length1 = line_length(point1.getX(), point1.getY(), point2.getX(), point2.getY())
+    length2 = line_length(point1.getX(), point1.getY(), point3.getX(), point3.getY())
+    length3 = line_length(point2.getX(), point2.getY(), point3.getX(), point3.getY())
+
+    s = (length1 + length2 + length3) / 2
+    area = round(math.sqrt(s*(s - length1)*(s - length2)*(s - length3)), 1)
+    perimeter = round(length1 + length2 + length3, 1)
+    
+    result = Text(Point(2, 2), f'Area: {area} Perimeter: {perimeter}')
+    result.draw(win)
+
+    win.getMouse()
+    win.close()
+
+def exercise_11():
+    win = GraphWin ("Exercise_10", 500, 500)
+    win.setCoords(-10, -10, 10, 10)
+
+    point1 = win.getMouse()
+    point2 = win.getMouse()
+    point3 = win.getMouse()
+    point4 = win.getMouse()
+    point5 = win.getMouse()
+
+    rect = Rectangle(point1, point2)
+    rect.draw(win)
+
+    house_frame = abs(point1.getX() - point2.getX())
+
+    line = Line(Point(point3.getX()-(house_frame*0.1), point3.getY()), Point(point3.getX()+(house_frame*0.1), point3.getY()))
+    line.draw(win)
+    side1 = Line(Point(point3.getX()-(house_frame*0.1), point3.getY()), Point(point3.getX()-(house_frame*0.1), point1.getY()))
+    side1.draw(win)
+    side2 = Line(Point(point3.getX()+(house_frame*0.1), point3.getY()), Point(point3.getX()+(house_frame*0.1), point1.getY()))
+    side2.draw(win)
+
+    leftWindow_X = point4.getX() - (0.05 * house_frame)
+    leftWindow_Y = point4.getY() - (0.05 * house_frame)
+    rightWindow_X = point4.getX() + (0.05 * house_frame)
+    rightWindow_Y = point4.getY() + (0.05 * house_frame)
+    window = Rectangle(Point(leftWindow_X, leftWindow_Y), Point(rightWindow_X, rightWindow_Y))
+    window.draw(win)
+
+    line_1 = Line(point5, point2)
+    line_1.draw(win)
+    line_2 = Line(point5, Point(point1.getX(), point2.getY()))
+    line_2.draw(win)
+
+
+    win.getMouse()
+    win.close()
+
+exercise_11()
