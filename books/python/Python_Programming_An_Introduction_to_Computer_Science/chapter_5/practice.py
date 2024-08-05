@@ -12,10 +12,23 @@ def encoder():
 
 def decoder():
     encoded_message = input('Give the sequence of numbers to decode. ').split()
-    decoded_message = ''
+    decoded_message = []
     for n in encoded_message:
         n = int(n)
-        decoded_message = decoded_message + chr(n)
-    print(decoded_message)
+        decoded_message.append(chr(n))
+    final_message = ''.join(decoded_message)
+    print(final_message)
 
-decoder()
+def date_conversion():
+    date_input = input('Give a date: ').split('/')
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    
+    month = ''
+    for i in range(1, 13):
+        if int(date_input[1]) == i:
+            month = months[i-1]
+    result = f'{month} {date_input[0]}, {date_input[2]}'
+    print(result)
+
+date_conversion()
