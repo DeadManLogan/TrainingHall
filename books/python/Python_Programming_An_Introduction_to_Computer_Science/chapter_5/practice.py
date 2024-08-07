@@ -41,4 +41,14 @@ def file_proc():
     infile.close()
     new_file.close()
 
-file_proc()
+def usernames():
+    reader = open('chapter_5/names.txt', 'r')
+    writer = open('chapter_5/usernames.txt', 'w')
+    for line in reader:
+        name, surname = line.split()
+        username = f'{surname[0]}.{name}'.lower()
+        print(username, file=writer)
+    reader.close(), writer.close()
+
+
+usernames()
