@@ -31,4 +31,14 @@ def date_conversion():
     result = f'{month} {date_input[0]}, {date_input[2]}'
     print(result)
 
-date_conversion()
+def file_proc():
+    name = 'chapter_5\quotes.txt'
+    infile = open(name, 'r')
+    new_file = open('chapter_5\output.txt', 'w')
+
+    for line in infile:
+        print(f'{line} TEST!!', file=new_file, end='')
+    infile.close()
+    new_file.close()
+
+file_proc()
