@@ -164,12 +164,16 @@ def exercise_16():
             if int(line) == i:
                 scores[i] += 1
 
+    print(scores)
+
     for i in range(11):
         number = Text(Point(-90 + (i*15), -90), i)
-        rect = Rectangle(Point(-90 + (i*15), -85), Point(-93 + (i*15), scores[i]*10))
+        rect = Rectangle(Point(-90 + (i*15), -85), Point(-93 + (i*15), -85 + scores[i]*25))
         rect.draw(win)
         number.draw(win)
 
     win.getMouse()
     win.close()
     reader.close()
+
+exercise_16()

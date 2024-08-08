@@ -6,6 +6,8 @@ This repository contains solutions to exercises from the book "Python Programmin
 
 - **Chapter 4:** Objects and Graphics
 - **Chapter 5:** Sequences: Strings, Lists and Files
+- **Chapter 6:** Defining Functions
+
 
 ## Usage
 
