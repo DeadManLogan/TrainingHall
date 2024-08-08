@@ -39,4 +39,29 @@ def exercise_6():
         number += ord(ch) - 96
     print(number)
 
-exercise_6()
+def exercise_7():
+    string = input("Enter the string to be encoded: ")
+    key = int(input("Enter the key: "))
+
+    msg = ""
+    for i in string:
+        msg = msg +  chr(ord(i) + key)
+    print(msg)
+
+def exercise_8():
+    string = input("Enter the string to be encoded: ").lower()
+    key = int(input("Enter the key: "))
+
+    msg = ""
+    for ch in string:
+        n = ord(ch)
+        if ord('a') <= n <= ord('z'):
+            n -= ord('a')
+            n = (n + key) % 26
+            n += ord('a')
+            msg = msg + chr(n)
+        else:
+            msg = msg + ch
+    print(msg)
+
+exercise_8()
