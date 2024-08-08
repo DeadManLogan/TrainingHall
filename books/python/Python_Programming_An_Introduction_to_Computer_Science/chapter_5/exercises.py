@@ -18,7 +18,11 @@ def exercise_3():
             print('F')
             break
 
-# def exercise_4():
+def exercise_4():
+    phrase = input("Give a phrase: ").title().split()
+    acronym = ""
+    for word in phrase:
+        acronym = acronym + word[0]
+    print(acronym)
 
-
-exercise_3()
+exercise_4()
