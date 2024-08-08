@@ -25,4 +25,18 @@ def exercise_4():
         acronym = acronym + word[0]
     print(acronym)
 
-exercise_4()
+def exercise_5():
+    name = input("Enter a name: ").lower()
+    number = 0
+    for ch in name:
+        number += ord(ch) - 96
+    print(number)
+
+def exercise_6():
+    name = input("Enter a name: ").lower().replace(" ", "")
+    number = 0
+    for ch in name:
+        number += ord(ch) - 96
+    print(number)
+
+exercise_6()
