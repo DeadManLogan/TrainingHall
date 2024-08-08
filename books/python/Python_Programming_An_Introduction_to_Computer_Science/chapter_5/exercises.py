@@ -1,3 +1,5 @@
+from graphics import *
+
 def exercise_2():
     scale = ['5-A', '4-B', '3-C', '2-D', '1-F', '0-F']
     grade = int(input('Give the grade (0-5): '))
@@ -128,6 +130,46 @@ def exercise_14():
 
     print(f"Lines: {lines}  Words: {words}  Characters: {characters}")
 
+def exercise_15():
+    reader = open('chapter_5/exercise_material/exercise_15.txt', 'r')
+    win = GraphWin("Exercise 15", 500, 500)
+    win.setCoords(-100, -100, 100, 100)
 
+    num = int(reader.readline())
+    students = []
+    scores = []
+    for line in reader:
+        name, score = line.split()
+        students.append(name)
+        scores.append(score)
 
-exercise_14()
+    for i in range(1, num+1):
+        point = Text(Point(-75, 100 - (i*25)), students[i-1])
+        rect = Rectangle(Point(-60, 100 - (i*25)), Point(scores[i-1]*1, 102 - (i*25)))
+        rect.draw(win)
+        point.draw(win)
+
+    win.getMouse()
+    win.close()
+    reader.close()
+
+def exercise_16():
+    reader = open('chapter_5/exercise_material/exercise_16.txt', 'r')
+    win = GraphWin("Exercise 15", 500, 500)
+    win.setCoords(-100, -100, 100, 100)
+
+    scores = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for line in reader:
+        for i in range(11):
+            if int(line) == i:
+                scores[i] += 1
+
+    for i in range(11):
+        number = Text(Point(-90 + (i*15), -90), i)
+        rect = Rectangle(Point(-90 + (i*15), -85), Point(-93 + (i*15), scores[i]*10))
+        rect.draw(win)
+        number.draw(win)
+
+    win.getMouse()
+    win.close()
+    reader.close()
