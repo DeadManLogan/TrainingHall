@@ -2,6 +2,7 @@ from graphics import *
 import random
 import math
 
+# EXERCISE 1
 def exercise_1():
     win = GraphWin()
     shape = Rectangle(Point(50,50), Point(100,100))
@@ -23,6 +24,7 @@ def exercise_1():
     win.getMouse()
     win.close()
 
+# EXERCISE 2
 def exercise_2():
     win = GraphWin('Exercise 2', 1000, 1000)
 
@@ -41,6 +43,7 @@ def exercise_2():
     win.getMouse()
     win.close()
 
+# EXERCISE 3
 def exerceise_3():
     win = GraphWin('Exercise 3', 500, 500)
 
@@ -59,6 +62,7 @@ def exerceise_3():
     win.getMouse()
     win.close()
 
+# EXERCISE 5
 def draw_die(value):
     background = Rectangle(Point(20, 20), Point(180, 180)) 
 
@@ -110,6 +114,7 @@ def exercise_5():
     win.getMouse()
     win.close()
 
+# EXERCISE 6
 def exercise_6():
     win = GraphWin ("Exercise_6", 800, 800)
 
@@ -150,6 +155,7 @@ def exercise_6():
     win.getMouse()
     win.close()
 
+# EXERCISE 7
 def exercise_7():
     win = GraphWin ("Exercise_7", 500, 500)
     win.setCoords(-10, -10, 10, 10)
@@ -180,6 +186,7 @@ def exercise_7():
     win.getMouse()
     win.close()
 
+# EXERCISE 8
 def exercise_8():
     win = GraphWin ("Exercise_8", 500, 500)
     win.setCoords(-10, -10, 10, 10)
@@ -202,6 +209,7 @@ def exercise_8():
     win.getMouse()
     win.close()
 
+# EXERCISE 9
 def exercise_9():
     win = GraphWin ("Exercise_9", 500, 500)
     win.setCoords(-10, -10, 10, 10)
@@ -223,6 +231,7 @@ def exercise_9():
     win.getMouse()
     win.close()
 
+# EXERCISE 10
 def line_length(start_point_x, start_point_y, end_point_x, end_point_y):
     dx = end_point_x - start_point_x
     dy = end_point_y - start_point_y
@@ -260,6 +269,7 @@ def exercise_10():
     win.getMouse()
     win.close()
 
+# EXERCISE 11
 def exercise_11():
     win = GraphWin ("Exercise_10", 500, 500)
     win.setCoords(-10, -10, 10, 10)

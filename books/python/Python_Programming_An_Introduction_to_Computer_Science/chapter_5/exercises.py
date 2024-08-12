@@ -1,5 +1,6 @@
 from graphics import *
 
+# EXERCISE 2
 def exercise_2():
     scale = ['5-A', '4-B', '3-C', '2-D', '1-F', '0-F']
     grade = int(input('Give the grade (0-5): '))
@@ -8,6 +9,7 @@ def exercise_2():
         if grade == int(i[0]):
             print(i[2])
 
+# EXERCISE 3
 def exercise_3():
     scale = ['90:A', '80:B', '70:C', '60:D']
     grade = int(input('Give the grade (0-100): '))
@@ -20,6 +22,7 @@ def exercise_3():
             print('F')
             break
 
+# EXERCISE 4
 def exercise_4():
     phrase = input("Give a phrase: ").title().split()
     acronym = ""
@@ -27,6 +30,7 @@ def exercise_4():
         acronym = acronym + word[0]
     print(acronym)
 
+# EXERCISE 5
 def exercise_5():
     name = input("Enter a name: ").lower()
     number = 0
@@ -34,6 +38,7 @@ def exercise_5():
         number += ord(ch) - 96
     print(number)
 
+# EXERCISE 6
 def exercise_6():
     name = input("Enter a name: ").lower().replace(" ", "")
     number = 0
@@ -41,6 +46,7 @@ def exercise_6():
         number += ord(ch) - 96
     print(number)
 
+# EXERCISE 7
 def exercise_7():
     string = input("Enter the string to be encoded: ")
     key = int(input("Enter the key: "))
@@ -50,6 +56,7 @@ def exercise_7():
         msg = msg +  chr(ord(i) + key)
     print(msg)
 
+# EXERCISE 8
 def exercise_8():
     string = input("Enter the string to be encoded: ").lower()
     key = int(input("Enter the key: "))
@@ -66,10 +73,12 @@ def exercise_8():
             msg = msg + ch
     print(msg)
 
+# EXERCISE 9
 def exercise_9():
     sen = input("Enter words: ").split()
     print(f"There are {len(sen)} words in your sentence.")
 
+# EXERCISE 10
 def exercise_10():
     sen = input("Enter words: ").split()
 
@@ -78,6 +87,7 @@ def exercise_10():
         sum += len(w) 
     print(f"Average word lenght: {sum/len(sen)}")
 
+# EXERCISE 11
 def exercise_11():
     num1, num2 = input("Enter 2 numbers: ").split()
     num1 = float(num1)
@@ -90,6 +100,7 @@ def exercise_11():
         num2 = 3.9 * num2 * (1 - num2)
         print(f"{iterations}    {num1}      {num2}")
 
+# EXERCISE 12
 def exercise_12():
     principal = float(input("Enter the starting investment: "))
     apr = float(input("Enter the interst rate: "))
@@ -100,6 +111,7 @@ def exercise_12():
         principal += apr*principal
         print(f"{i}     ${principal}")
 
+# EXERCISE 13
 def exercise_13_12():
     reader = open('chapter_5/exercise_material/input.txt', 'r')
     writer = open('chapter_5/exercise_material/output.txt', 'w')
@@ -114,6 +126,7 @@ def exercise_13_12():
         print(f"{i+1}     ${inputs[0]}", file=writer)
     reader.close(), writer.close()
 
+# EXERCISE 14
 def exercise_14():
     file = input("Enter the path of the input file: ")
     reader = open(file, 'r')
@@ -130,6 +143,7 @@ def exercise_14():
 
     print(f"Lines: {lines}  Words: {words}  Characters: {characters}")
 
+# EXERCISE 15
 def exercise_15():
     reader = open('chapter_5/exercise_material/exercise_15.txt', 'r')
     win = GraphWin("Exercise 15", 500, 500)
@@ -153,6 +167,7 @@ def exercise_15():
     win.close()
     reader.close()
 
+# EXERCISE 16
 def exercise_16():
     reader = open('chapter_5/exercise_material/exercise_16.txt', 'r')
     win = GraphWin("Exercise 15", 500, 500)
