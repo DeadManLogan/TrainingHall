@@ -86,4 +86,34 @@ def exercise_6():
     area = triangle_are(sides)
     print(f"Triangle Area: {area}")
 
-exercise_6()
+# EXERCISE 7
+def fibonacci(n):
+    num1 = 0
+    num2 = 1
+    next_num = num2
+    count = 1
+
+    while count <= n:
+        print(next_num, end=" ")
+        count += 1
+        num1, num2 = num2, next_num
+        next_num = num1 + num2
+
+def exercise_7():
+    n = int(input("Enter a positive natural number: "))
+    print(fibonacci(n))
+
+# EXERCISE 8
+def next_guess(guess, x):
+    next = (guess + x/guess)/2
+    return next
+
+def exercise_8():
+    x = float(input("Enter a number: "))
+    times = int(input("Enter the times to guess: "))
+    guess = x/2
+    for _ in range(times):
+        final = next_guess(guess, x)
+    print(abs(final - math.sqrt(x)))
+
+exercise_8()
