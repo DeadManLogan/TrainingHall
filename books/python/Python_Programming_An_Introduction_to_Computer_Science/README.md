@@ -1,12 +1,13 @@
 # Python Programming: An Introduction to Computer Science
 
-This repository contains solutions to exercises from the book "Python Programming: An Introduction to Computer Science." The solutions are organized by chapters, following the book's structure.
+This repository contains solutions to programming exercises from the book "Python Programming: An Introduction to Computer Science." The solutions are organized by chapters, following the book's structure.
 
 ## Contents
 
 - **Chapter 4:** Objects and Graphics
 - **Chapter 5:** Sequences: Strings, Lists and Files
 - **Chapter 6:** Defining Functions
+- **Chapter 7:** Decision Structures
 
 
 ## Usage
