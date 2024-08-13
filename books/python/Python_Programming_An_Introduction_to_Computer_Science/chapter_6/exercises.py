@@ -1,4 +1,5 @@
 import math
+from graphics import *
 
 # EXERCISE 1
 def lyrics_1(animals, sounds):
@@ -142,13 +143,111 @@ def exercise_10():
     print(acronym(phrase))
     
 # EXERCISE 11
-def squareEach(nums):
+def square_each(nums):
     sq_nums = [i**2 for i in nums]
     return sq_nums
 
 def exercise_11():
     nums = [1, 2, 3, 4, 5]
-    sq_nums = squareEach(nums)
+    sq_nums = square_each(nums)
     print(sq_nums)
 
-exercise_11()
+# EXERCISE 12
+def sum_lists(nums):
+    return sum(nums)
+
+def exercise_12():
+    nums = [1, 2, 3, 4]
+    print(sum_lists(nums))
+
+# EXERCISE 13
+def to_numbers(str_list):
+    int_list = [int(i) for i in str_list]
+    return int_list
+
+def exercise_13():
+    str_list = ['1', '2', '3']
+    print(to_numbers(str_list))
+
+# EXERCISE 14
+def exercise_14():
+    reader = open('chapter_6/exercise_material/exercise_14.txt', 'r')
+    nums = reader.readlines()
+    int_nums = to_numbers(nums)
+    sq_nums = square_each(int_nums)
+    sum_nums = sum_lists(sq_nums)
+    print(sum_nums)
+    reader.close()
+
+# EXERCISE 15
+def draw_face(center, size, win):
+    face = Circle(center, size)
+    face.setFill("yellow")
+    face.draw(win)
+
+    eye_radius = size * 0.1
+    left_eye_center = Point(center.getX() - size * 0.3, center.getY() - size * 0.2)
+    right_eye_center = Point(center.getX() + size * 0.3, center.getY() - size * 0.2)
+
+    left_eye = Circle(left_eye_center, eye_radius)
+    right_eye = Circle(right_eye_center, eye_radius)
+    left_eye.setFill("black")
+    right_eye.setFill("black")
+    left_eye.draw(win)
+    right_eye.draw(win)
+
+    mouth = Oval(Point(center.getX() - size * 0.4, center.getY() + size * 0.2),
+                  Point(center.getX() + size * 0.4, center.getY() + size * 0.4))
+    mouth.setFill("red")
+    mouth.draw(win)
+
+def exercise_15():
+    win = GraphWin('Exercise 15', 700, 700)
+
+    draw_face(Point(100,100), 50, win)
+    draw_face(Point(200,200), 30, win)
+
+    win.getMouse()
+    win.close()
+
+# EXERCISE 16
+def exercise_16():
+    win = GraphWin('Exercise 16', 700, 700)
+    image_path = "chapter_6/exercise_material/family.ppm"
+
+    family_img = Image(Point(350, 350), image_path)
+    family_img.draw(win)
+
+    faces_num = int(input("Number of faces to block: "))
+
+    for i in range(faces_num):
+        center = win.getMouse()
+        radius = win.getMouse()
+        size = math.sqrt(abs(radius.getX() - center.getX())**2 + abs(radius.getY() - center.getY())**2)
+        draw_face(center, size, win)
+
+    win.getMouse()
+    win.close()
+
+# EXERCISE 17
+def move_to(shape, new_center):
+    c = shape.getCenter()
+    dx = new_center.getX() - c.getX()
+    dy = new_center.getY() - c.getY()
+    shape.move(dx, dy)
+
+def exercise_17():
+    win = GraphWin('Exercise 17', 700, 700)
+
+    circle = Circle(Point(500,500), 150)
+    circle.setFill('black')
+    circle.draw(win)
+
+    for i in range(10):
+        new_center = win.getMouse()
+        move_to(circle, new_center)
+
+    win.getMouse()
+    win.close()
+
+exercise_17()
