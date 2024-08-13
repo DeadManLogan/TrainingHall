@@ -116,4 +116,39 @@ def exercise_8():
         final = next_guess(guess, x)
     print(abs(final - math.sqrt(x)))
 
-exercise_8()
+# EXERCISE 9
+def grade(score):
+    scale = ['90:A', '80:B', '70:C', '60:D']
+
+    for i in scale:
+        if score >= int(i[:2]):
+            return (i[3])
+        elif score < 60:
+            return ('F')
+
+def exercise_9():
+    score = int(input('Give the grade (0-100): '))
+    print(grade(score))
+
+# EXERCISE 10
+def acronym(phrase):
+    acronym = ""
+    for word in phrase:
+        acronym = acronym + word[0]
+    return acronym
+
+def exercise_10():
+    phrase = input("Give a phrase: ").title().split()
+    print(acronym(phrase))
+    
+# EXERCISE 11
+def squareEach(nums):
+    sq_nums = [i**2 for i in nums]
+    return sq_nums
+
+def exercise_11():
+    nums = [1, 2, 3, 4, 5]
+    sq_nums = squareEach(nums)
+    print(sq_nums)
+
+exercise_11()
