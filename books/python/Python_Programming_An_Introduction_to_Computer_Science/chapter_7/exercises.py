@@ -17,11 +17,14 @@ def main():
     c = float(input("Enter coefficient c: "))
 
     discrim = b*b - 4*a*c
-    if discrim >= 0:
+    if discrim > 0:
         disc_root = math.sqrt(discrim)
         root_1 = (-b + disc_root)/(2*a)
         root_2 = (-b - disc_root)/(2*a)
         print(f"Solutions: {root_1}, {root_2}")
+    elif discrim == 0:
+        root = -b/(2*a)
+        print(f"Double root: {root}")
     else:
         print("No real roots.")
 
