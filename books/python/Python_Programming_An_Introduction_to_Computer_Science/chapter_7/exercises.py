@@ -83,4 +83,27 @@ def exercise_5():
     else:
         print("You are above the healthy range.")
 
-exercise_5()
+# EXERCISE 6
+def exercise_6():
+    try:
+        speed_limit = int(input("Enter the speed limit of the road: "))
+        clocked_speed = int(input("Enter the vehicle's speed: "))
+    except:
+        print("Inputs must be integers.")
+
+    speed_difference = clocked_speed - speed_limit
+
+    if clocked_speed > speed_limit:
+        fine = 50
+        if clocked_speed > 90:
+            fine += 200
+        if (speed_difference) > 0:
+            fine += speed_difference * 5
+        print(f"You have to pay {fine}$.")
+    else:
+        print("Legal speed.")
+        
+
+
+
+exercise_6()
