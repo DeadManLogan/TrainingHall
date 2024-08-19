@@ -103,7 +103,49 @@ def exercise_6():
     else:
         print("Legal speed.")
         
+# EXERCISE 7
+def calculate_price(s_hours, e_hours, s_minutes, e_minutes):
+    price = 0
 
+    if (e_hours - 21) >= 0:
+        total_h = 21 - s_hours
+        price = total_h * 2.5
 
+        price += (e_hours - 21) * 1.75
 
-exercise_6()
+        if (s_minutes - e_minutes) <= 0:
+            price += 1.75
+    else:
+        total_h = e_hours - s_hours
+        price = total_h * 2.5
+
+        if (s_minutes - e_minutes) <= 0:
+            price += 2.5
+
+    return price
+
+def exercise_7():
+    starting_time = input("Enter the starting time in hours and minutes (e.g. 12:34): ")
+    s_hours, s_minutes = starting_time.split(":")
+    s_hours, s_minutes = int(s_hours), int(s_minutes)
+
+    ending_time = input("Enter the ending time in hours and minutes (e.g. 18:34): ")
+    e_hours, e_minutes = ending_time.split(":")
+    e_hours, e_minutes = int(e_hours), int(e_minutes)
+
+    price = calculate_price(s_hours, e_hours, s_minutes, e_minutes)
+    print(price)
+
+# EXERCISE 8
+def exercise_8():
+    age = int(input("Enter your age: "))
+    years_cit = int(input("Enter for how long you are a US citizen: "))
+
+    if (age >= 30) and (years_cit >= 9):
+        print("You can become a Senator or a House representative!")
+    elif (age >= 25) or (age < 30) and (years_cit >= 7) or (years_cit < 9):
+        print("You can become House representative.")
+    else:
+        print("You are a peasant.")
+
+exercise_8()
