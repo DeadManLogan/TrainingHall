@@ -323,4 +323,31 @@ def exercise_14():
     win.getMouse()
     win.close()
 
-exercise_14()
+# EXERCISE 15
+def exercise_15():
+    win = GraphWin ("Exercise_8", 500, 500)
+    win.setCoords(-10, -10, 10, 10)
+
+    start_point = win.getMouse()
+    end_point = win.getMouse()
+
+    line = Line(start_point, end_point)
+    line.setOutline('cyan')
+    line.draw(win)
+
+    dx = end_point.getX() - start_point.getX()
+    dy = end_point.getY() - start_point.getY()
+
+    if dx == 0:
+        print("Line should not be vertical.")
+    else:
+        slope = round(dy/dx, 1)
+        length = round(math.sqrt(dx**2 + dy**2), 1)
+
+        result = Text(Point(2, 2), f'Length: {length} Slope: {slope}')
+        result.draw(win)
+
+    win.getMouse()
+    win.close()
+
+exercise_15()
