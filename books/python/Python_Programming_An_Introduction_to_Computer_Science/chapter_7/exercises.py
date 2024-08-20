@@ -148,4 +148,49 @@ def exercise_8():
     else:
         print("You are a peasant.")
 
-exercise_8()
+# EXERCISE 9
+def easter(year):
+    a = year % 19
+    b = year % 4
+    c = year % 7
+    d = ((19 * a) + 24) % 30
+    e = ((2 * b) + (4 * c) + (6 * d) + 5) % 7
+
+    date = 22 + d + e
+    if date > 31:
+        print(f"Easter is on April, {date - 31}")
+    else:
+        print(f"Easter is on March, {date}")
+
+def exercise_9():
+    year = int(input("Enter a year between 1982 - 2048: "))
+    if year < 1982 or year > 2048:
+        year = int(input("The input was not correct. Enter a year between 1982 - 2048: "))
+    
+    easter(year)
+
+# EXERCISE 10def easter(year):
+def easter_mod(year):
+    special_years = [1954, 1981, 2049, 2076]
+    a = year % 19
+    b = year % 4
+    c = year % 7
+    d = ((19 * a) + 24) % 30
+    e = ((2 * b) + (4 * c) + (6 * d) + 5) % 7
+
+    date = 22 + d + e
+    if year in special_years:
+        date -= 7
+    if date > 31:
+        print(f"Easter is on April, {date - 31}")
+    else:
+        print(f"Easter is on March, {date}")
+
+def exercise_10():
+    year = int(input("Enter a year between 1900 - 2099: "))
+    if year < 1900 or year > 2099:
+        year = int(input("The input was not correct. Enter a year between 1900 - 2099: "))
+    
+    easter_mod(year)
+
+exercise_10()
