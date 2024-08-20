@@ -1,3 +1,6 @@
+from graphics import *
+import math
+
 # EXERCISE 1
 def exercise_1():
     hours = float(input("Enter the hours you worked: "))
@@ -193,4 +196,131 @@ def exercise_10():
     
     easter_mod(year)
 
-exercise_10()
+# EXERCISE 11
+def leap_year(year):
+    if year % 100 == 0:
+        if year % 400 == 0:
+            print(f"{year} is leap year.")
+        else:
+            print(f"{year} is not leap year.")
+    elif year % 4 == 0:
+        print(f"{year} is leap year.")
+    else:
+        print(f"{year} is not a leap year.")
+
+def exercise_11():
+    year = int(input("Enter a year: "))
+    leap_year(year)
+
+# EXERCISE 12
+def valid_date(year):
+    months_31 = [1, 3, 5, 7, 8, 10, 12]
+    months_30 = [4, 6, 9, 11]
+
+    month = int(year[0])
+    day = int(year[1])
+    year = int(year[2])
+
+    if year % 100 == 0:
+        if year % 400 == 0:
+            leap = 1
+        else:
+            leap = 0
+    elif year % 4 == 0:
+        leap = 1
+    else:
+        leap = 0
+
+    if month < 0 or month > 12:
+        print("Not a real date")
+    
+    if (day > 31 or day < 1) and month not in months_31:
+        print("Not a real date")
+    elif (day > 30 or day < 1) and month not in months_30:
+        print("Not a real date")
+    elif leap == 1 and (day > 29 or day < 1):
+        print("Not a real date")
+    elif leap == 0 and (day > 28 or day < 1):
+        print("Not a real date")
+    else:
+        print("It's a real date.")
+
+def exercise_12():
+    date = input("Enter a date in the format MM/dd/YYYY: ").split("/")
+    valid_date(date)
+
+# EXERCISE 13
+def calculate_day_num(month, day, year):
+    months_31 = [1, 3, 5, 7, 8, 10, 12]
+    months_30 = [4, 6, 9, 11]
+
+    day_num = 31 * (month - 1) + day
+
+    if year % 100 == 0:
+        if (year % 400 == 0) and ((month == 2 and day > 29) or (month > 2)):
+            day_num -= ((4 * month) + 23) // 10
+            day_num += 1
+        elif month > 2:
+            day_num -= ((4 * month) + 23) // 10
+    elif (year % 4 == 0) and ((month == 2 and day > 29) or (month > 2)):
+        day_num -= ((4 * month) + 23) // 10
+        day_num += 1
+    elif month > 2:
+        day_num -= ((4 * month) + 23) // 10
+    
+    return day_num
+
+def exercise_13():
+    date = input("Enter a date in the format MM/dd/YYYY: ").split("/")
+    month = int(date[0])
+    day = int(date[1])
+    year = int(date[2])
+    num = calculate_day_num(month, day, year)
+    print(f"The number of the day is: {num}")
+
+# EXERCISE 14
+def draw_points(win, rad, y_intercept):
+    if rad == y_intercept:
+        red_x1 = round(abs(math.sqrt(rad**2 - y_intercept**2)), 1)
+        red_x2 = -red_x1
+
+        red_point1 = Point(red_x1, y_intercept)
+        red_point1.setOutline('red')
+        red_point1.draw(win)
+
+        result = Text(Point(0, 5), f'Point 1: {red_point1}')
+        result.draw(win)
+    else:
+        red_x1 = round(abs(math.sqrt(rad**2 - y_intercept**2)), 1)
+        red_x2 = -red_x1
+
+        red_point1 = Point(red_x1, y_intercept)
+        red_point1.setOutline('red')
+        red_point1.draw(win)
+
+        red_point2 = Point(red_x2, y_intercept)
+        red_point2.setOutline('red')
+        red_point2.draw(win)
+
+        result = Text(Point(0, 5), f'Point 1: {red_point1} Point 2: {red_point2}')
+        result.draw(win)
+
+def exercise_14():
+    win = GraphWin ("Exercise_7", 500, 500)
+    win.setCoords(-10, -10, 10, 10)
+
+    rad = float(input('Radius: '))
+    y_intercept = int(input('Y-interception: '))
+
+    circle = Circle(Point(0, 0), rad)
+    circle.draw(win)
+
+    line = Line(Point(-10, y_intercept), Point(10, y_intercept))
+    line.draw(win)
+
+    draw_points(win, rad, y_intercept)
+
+    win.getMouse()
+    win.close()
+
+exercise_14()
