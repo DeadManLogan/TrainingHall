@@ -306,7 +306,7 @@ def draw_points(win, rad, y_intercept):
         result.draw(win)
 
 def exercise_14():
-    win = GraphWin ("Exercise_7", 500, 500)
+    win = GraphWin ("Exercise_14", 500, 500)
     win.setCoords(-10, -10, 10, 10)
 
     rad = float(input('Radius: '))
@@ -325,7 +325,7 @@ def exercise_14():
 
 # EXERCISE 15
 def exercise_15():
-    win = GraphWin ("Exercise_8", 500, 500)
+    win = GraphWin ("Exercise_15", 500, 500)
     win.setCoords(-10, -10, 10, 10)
 
     start_point = win.getMouse()
@@ -350,4 +350,142 @@ def exercise_15():
     win.getMouse()
     win.close()
 
-exercise_15()
+# EXERCISE 16
+def count_score(distance_from_center):
+    if distance_from_center <= 30:
+        arrow_score = 9
+    elif distance_from_center <= 60:
+        arrow_score = 7
+    elif distance_from_center <= 90:
+        arrow_score = 5
+    elif distance_from_center <= 120:
+        arrow_score = 3
+    elif distance_from_center <= 150:
+        arrow_score = 1
+    else:
+        arrow_score = 0
+    return arrow_score
+
+def draw_target(win):
+    first_circle = Circle(Point(350,350), 150)
+    first_circle.setFill('white')
+    first_circle.draw(win)
+
+    circle_colors = ['black', 'blue', 'red', 'yellow']
+    score = 0
+
+    for i,color in enumerate(circle_colors):
+        i += 1
+        new_circle = Circle(first_circle.getCenter(), first_circle.getRadius() - (i*30))
+        new_circle.setFill(color)
+        new_circle.draw(win)
+    
+    for j in range(5):
+        x = j+1
+        spot = win.getMouse()
+        distance_from_center = math.sqrt((spot.getX() - 350) ** 2 + (spot.getY() - 350) ** 2)
+        
+        arrow_score = count_score(distance_from_center)
+
+        score += arrow_score
+        score_text = Text(Point(50, 40), "Score:")
+        score_text.draw(win)
+        score_message = Text(Point(x*80, 40), arrow_score)
+        score_message.draw(win)
+
+    win.getMouse()
+    total_score = Text(Point(80, 60), f"Total score: {score}")
+    total_score.draw(win)
+    
+def exercise_16():
+    win = GraphWin('Exercise 16', 700, 700)
+
+    draw_target(win)
+
+    win.getMouse()
+    win.close()
+
+# EXERCISE 17
+def exercise_17():
+    win = GraphWin('Exercise 17', 400, 400)
+
+    radius = 10
+    circle = Circle(Point(200,200), radius)
+    circle.setFill('white')
+    circle.draw(win)
+
+    dx, dy = 1, 1
+
+    for _ in range(1000):
+        circle.move(dx, dy)
+        center = circle.getCenter()
+        x = center.getX()
+        y = center.getY()
+
+        if x + radius >= 400 or x - radius <= 0:
+            dx = -dx
+        if y + radius >= 400 or y - radius <= 0:
+            dy = -dy
+        update(30)
+
+    win.getMouse()
+    win.close()
+
+# EXERCISE 18
+def exercise_18():
+    win = GraphWin ("Exercise_18", 500, 500)
+    win.setCoords(-10, -10, 10, 10)
+
+    point1 = win.getMouse()
+    point2 = win.getMouse()
+
+    point3 = win.getMouse()
+    if point3.getX() <= point1.getX() or point3.getX() >= point2.getX():
+        print("The door needs to be between doors.")
+        point3 = win.getMouse()
+    if point3.getY() <= point1.getY() or point3.getY() >= point2.getY():
+        print("The door needs to be between floor and ceiling.")
+        point3 = win.getMouse()
+
+    point4 = win.getMouse()
+    if point4.getX() <= point1.getX() or point4.getX() >= point2.getX():
+        print("The door needs to be between doors.")
+        point4 = win.getMouse()
+    if point4.getY() <= point1.getY() or point4.getY() >= point2.getY():
+        print("The door needs to be between floor and ceiling.")
+        point4 = win.getMouse()
+
+    point5 = win.getMouse()
+    if point5.getY() <= point2.getY():
+        print("Buddy we need a roof.")
+        point5 = win.getMouse()
+
+    rect = Rectangle(point1, point2)
+    rect.draw(win)
+
+    house_frame = abs(point1.getX() - point2.getX())
+
+    line = Line(Point(point3.getX()-(house_frame*0.1), point3.getY()), Point(point3.getX()+(house_frame*0.1), point3.getY()))
+    line.draw(win)
+    side1 = Line(Point(point3.getX()-(house_frame*0.1), point3.getY()), Point(point3.getX()-(house_frame*0.1), point1.getY()))
+    side1.draw(win)
+    side2 = Line(Point(point3.getX()+(house_frame*0.1), point3.getY()), Point(point3.getX()+(house_frame*0.1), point1.getY()))
+    side2.draw(win)
+
+    leftWindow_X = point4.getX() - (0.05 * house_frame)
+    leftWindow_Y = point4.getY() - (0.05 * house_frame)
+    rightWindow_X = point4.getX() + (0.05 * house_frame)
+    rightWindow_Y = point4.getY() + (0.05 * house_frame)
+    window = Rectangle(Point(leftWindow_X, leftWindow_Y), Point(rightWindow_X, rightWindow_Y))
+    window.draw(win)
+
+    line_1 = Line(point5, point2)
+    line_1.draw(win)
+    line_2 = Line(point5, Point(point1.getX(), point2.getY()))
+    line_2.draw(win)
+
+
+    win.getMouse()
+    win.close()
+
+exercise_18()
