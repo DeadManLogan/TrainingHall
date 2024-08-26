@@ -8,6 +8,8 @@ This repository contains solutions to programming exercises from the book "Pytho
 - **Chapter 5:** Sequences: Strings, Lists and Files
 - **Chapter 6:** Defining Functions
 - **Chapter 7:** Decision Structures
+- **Chapter 8:** Loop Structures & Booleans
+- **Chapter 9:** Simulation and Design
 
 
 ## Usage
