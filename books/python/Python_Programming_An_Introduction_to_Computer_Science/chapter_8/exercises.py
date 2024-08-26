@@ -106,4 +106,83 @@ def exercise_6():
     except ValueError as error:
         print(error)
 
-exercise_5()
+# EXERCISE 7
+def exercise_7():
+    n = int(input("Enter an even number: "))
+
+    while n % 2 == 0:
+        n = int(input("Enter an even number: "))
+
+    sum = 0
+    for i in range(2, int(n)):
+        for k in range(2, int(n)):
+            sum = i + k
+            if n - sum == 0:
+                print(f"The prime numbers that add up to {n} are: {i}, {k}")
+
+# EXERCISE 8
+def exercise_8():
+    n = 132
+    m = 260
+    print(f"The GCD of {n}, {m} is: ", end=" ")
+    while m != 0:
+        n, m = m, n % m
+    print(n)
+
+# EXERCISE 9
+def calculate_mpg(start_odometer, end_odometer, fuel_used):
+    distance = end_odometer - start_odometer
+    mpg = distance / fuel_used
+    return mpg
+
+def exercise_9():
+    start_odometer = float(input("Enter the starting odometer reading: "))
+    total_distance = 0
+    total_fuel_used = 0
+    leg_num = 1
+
+    while True:
+        leg_info = input("Enter the current odometer reading and gas used (separated by a space) or press Enter to finish: ")
+        if not leg_info.strip():
+            break
+
+        end_odometer, fuel_used = map(float, leg_info.split())
+        leg_mpg = calculate_mpg(start_odometer, end_odometer, fuel_used)
+        print(f"Leg {leg_num} mpg: {leg_mpg}")
+        total_distance += end_odometer - start_odometer
+        start_odometer = end_odometer
+        leg_num += 1
+        total_fuel_used += fuel_used
+
+    total_mpg = calculate_mpg(0, total_distance, total_fuel_used)
+
+    print(f"\nTotal MPG: {total_mpg:.2f}")
+
+# EXERCISE 10
+def exercise_10():
+    reader = open('chapter_8/exercise_material/exercise_10.txt', "r")
+    try:
+        start_odometer = float(reader.readline().strip())
+        total_distance = 0
+        total_fuel_used = 0
+        leg_num = 1
+
+        for line in reader:
+            if line.strip():
+                end_odometer, fuel_used = map(float, line.split())
+                leg_mpg = calculate_mpg(start_odometer, end_odometer, fuel_used)
+                print(f"Leg {leg_num} mpg: {leg_mpg}")
+                total_distance += end_odometer - start_odometer
+                start_odometer = end_odometer
+                leg_num += 1
+                total_fuel_used += fuel_used
+
+        total_mpg = calculate_mpg(0, total_distance, total_fuel_used)
+
+        print(f"\nTotal MPG: {total_mpg:.2f}")
+    except FileNotFoundError:
+        print(f"Error: The file was not found.")
+    except ValueError:
+        print("Error: Please ensure the file contains valid numeric data.")
+
+exercise_10()
