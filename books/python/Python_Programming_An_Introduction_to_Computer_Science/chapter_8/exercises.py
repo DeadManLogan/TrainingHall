@@ -185,4 +185,43 @@ def exercise_10():
     except ValueError:
         print("Error: Please ensure the file contains valid numeric data.")
 
-exercise_10()
+# EXERCISE 11
+def calculate_days(degrees):
+    heating_days = 0
+    cooling_days = 0
+
+    for d in degrees:
+        d = float(d)
+        if d <= 60:
+            heating_days += 60 - d
+        elif d >= 80:
+            cooling_days += d - 80
+    return heating_days, cooling_days
+
+def exercise_11():
+    degrees = input("Enter daily average temperatures: ").split()
+
+    h_days, c_days = calculate_days(degrees)
+
+    print(f"Heating days: {h_days}\nCooling days: {c_days}")
+
+# EXERCISE 12
+def calculate_days_2(reader):
+    heating_days = 0
+    cooling_days = 0
+
+    for line in reader:
+        line = float(line)
+        if line <= 60:
+            heating_days += 60 - line
+        elif line >= 80:
+            cooling_days += line - 80
+    return heating_days, cooling_days
+
+def exercise_12():
+    reader = open('chapter_8/exercise_material/exercise_12.txt', "r")
+
+    h_days, c_days = calculate_days_2(reader)
+    print(f"Heating days: {h_days}\nCooling days: {c_days}")
+    
+exercise_12()
