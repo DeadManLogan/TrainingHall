@@ -1,4 +1,5 @@
 import math
+from graphics import *
 
 # EXERCISE 1
 def exercise_1():
@@ -223,5 +224,67 @@ def exercise_12():
 
     h_days, c_days = calculate_days_2(reader)
     print(f"Heating days: {h_days}\nCooling days: {c_days}")
+
+# EXERCISE 14 
+def exercise_14():
+    image_path = "chapter_8/exercise_material/family.ppm"
+    save_path = "chapter_8/exercise_material/gray.ppm"
+
+    family_img = Image(Point(0, 0), image_path)
+    height = family_img.getHeight()
+    width = family_img.getWidth()
+
+    c_width = width / 2
+    c_height = height / 2
+    cen = Point(c_width, c_height)
+    win = GraphWin('Exercise 14', width, height)
+    family_img = Image(cen, image_path)
+    family_img.draw(win)
+
+    point = win.getMouse()
+    x = point.getX()
+    y = point.getY()
+
+    for x in range(width):
+        for y in range(height):
+            r, g, b = family_img.getPixel(x, y)
+            gray = int(round(.299*r + .587*g + .114*b))
+            family_img.setPixel(x,y, color_rgb(gray, gray, gray))
+            win.update()
+
+    family_img.save()
+    win.getMouse()
+    win.close()
+
+# EXERCISE 15
+def exercise_15():
+    image_path = "chapter_8/exercise_material/family.ppm"
+    save_path = "chapter_8/exercise_material/gray.ppm"
+
+    family_img = Image(Point(0, 0), image_path)
+    height = family_img.getHeight()
+    width = family_img.getWidth()
+
+    c_width = width / 2
+    c_height = height / 2
+    cen = Point(c_width, c_height)
+    win = GraphWin('Exercise 14', width, height)
+    family_img = Image(cen, image_path)
+    family_img.draw(win)
+
+    point = win.getMouse()
+    x = point.getX()
+    y = point.getY()
+
+    for x in range(width):
+        for y in range(height):
+            r, g, b = family_img.getPixel(x, y)
+            gray = int(round(255 - r + 255 - g + 255 - b))
+            family_img.setPixel(x,y, color_rgb(gray, gray, gray))
+            win.update()
+
+    family_img.save()
+    win.getMouse()
+    win.close()
     
-exercise_12()
+exercise_14()
