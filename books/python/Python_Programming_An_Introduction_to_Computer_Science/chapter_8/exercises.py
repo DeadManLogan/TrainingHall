@@ -286,5 +286,45 @@ def exercise_15():
     family_img.save()
     win.getMouse()
     win.close()
+
+# EXERCISE 16
+def handle_key(win, key):
+    if key == "r":
+        win.setBackground("red")
+    else:
+        win.setBackground("black")
+
+def check_mouse(win, m):
+    entry = Entry(m, 10)
+    entry.draw(win)
+
+    while True:
+        key = win.getKey()
+        if key == "Return":
+            entry.undraw()
+            typed = entry.getText()
+            Text(m, typed).draw(win)
+            break
+        if key == "Escape": 
+            entry.undraw()
+            break
+
+    win.checkMouse()
+
+def exercise_16():
+    win = GraphWin("Exercise 16", 500, 500)
+
+    while True:
+        key = win.checkKey()
+
+        if key == "q":
+            break
+        if key:
+            handle_key(win, key)
+
+        m = win.checkMouse()
+        if m:
+            check_mouse(win, m)
+    win.close()
     
-exercise_14()
+exercise_16()
