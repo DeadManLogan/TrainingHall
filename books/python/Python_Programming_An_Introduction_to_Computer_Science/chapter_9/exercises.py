@@ -1,4 +1,6 @@
-from random import random, randrange
+from random import random, randrange, uniform, randint, choice
+from graphics import *
+import math
 
 # EXERCISE 1
 def play_game(games_n, player_a, player_b):
@@ -341,4 +343,130 @@ def exercise_9():
         losses = simulate_games(games, starting_points)
         print(f"The probability of the dealer busting starting with {starting_points} is: {losses/games}")
 
-exercise_9()
+# EXERCISE 10
+def throw_darts(darts_num):
+    hits = 0
+    for i in range(darts_num):
+        x = uniform(-1, 1)
+        y = uniform(-1, 1)
+        
+        if x**2 + y**2 < 1:
+            hits += 1
+    return hits
+
+def calculate_pi(darts_num):
+    hits = throw_darts(darts_num)
+    return 4 * (hits / darts_num)
+
+def exercise_10():
+    darts_num = int(input("Enter the number of darts: "))
+
+    pi = calculate_pi(darts_num)
+    print(f"Estimated vlaue of pi after throwing {darts_num} darts is: {pi}")
+
+# EXERCISE 11
+def roll_dices(dices_number=5):
+    dices = []
+    for _ in range(dices_number):
+        dices.append(randint(1, 6))
+    return dices
+
+def check_dices(roll):
+    check = len(set(roll)) == 1
+    return check
+
+def simulate_rolls(simulations):
+    successful_rolls = 0
+    for _ in range(simulations):
+        roll = roll_dices()
+        if check_dices(roll):
+            successful_rolls += 1
+    return successful_rolls
+
+def exercise_11():
+    simulations = int(input("Enter the number of simulations to run: "))
+    dices_number = 5
+
+    successful_rolls = simulate_rolls(dices_number)
+    print(f"The probability of throwing 5 of the same in a roll of 5 regular dices is: {(successful_rolls/simulations):.6f}")
+
+# EXERCISE 12
+def take_step():
+    step = randint(1, 2)
+    if step == 1:
+        return True
+    else:
+        return False
+
+def simulate_walk(steps):
+    forward = backward = 0
+    for _ in range(steps):
+        step = take_step()
+        if step:
+            forward += 1
+        else:
+            backward += 1
+    return forward - backward
+
+def exercise_12():
+    steps = int(input("Enter the number of steps: "))
+
+    distance = simulate_walk(steps)
+    print(f"You walked {distance} steps.")
+
+# EXERCISE 13
+def simulate_walk(steps):
+    x = y = 0
+    distance = 0
+    for _ in range(steps):
+        (dx, dy) = choice([(0,1), (0,-1), (1,0), (-1,0)])
+        x += dx
+        y += dy
+        distance =  (x**2 + y**2)**0.5
+    return distance
+
+def exercise_13():
+    steps = int(input("Enter the number of steps: "))
+   
+    distance = simulate_walk(steps)
+    print(distance)
+
+# EXERCISE 14
+def angle():
+    angle = random() * 2 * math.pi
+    return angle
+
+def draw_step(win, center, total_steps):
+    x = y = 0
+    for _ in range(1, total_steps+1):
+        x += math.cos(angle())
+        y += math.sin(angle())
+        step = Line(center, Point(x, y))
+        step.draw(win)
+
+def exercise_14():
+    total_steps = int(input("How many steps should I take: "))
+    win = GraphWin("Exercise 14", 500, 500)
+    win.setCoords(-50, -50, 50, 50)
+
+    center = Point(0, 0)
+    center.draw(win)
+
+    draw_step(win, center, total_steps)
+
+    win.getMouse()
+    win.close()
+
+# EXERCISE 15
+def exercise_15():
+    total_steps = int(input("How many steps should I take: "))
+    hits = 0
+
+    for _ in range(total_steps):
+        u = random()
+        v = random()
+        w = random()
+        if (u > 0 and abs(v) < 2*u and abs(w) < 2*u):
+            hits += 1
+    print(f"Fraction of the field vision taken by the wall is: {hits/total_steps}")
+exercise_15()
