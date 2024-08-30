@@ -10,6 +10,7 @@ This repository contains solutions to programming exercises from the book "Pytho
 - **Chapter 7:** Decision Structures
 - **Chapter 8:** Loop Structures & Booleans
 - **Chapter 9:** Simulation and Design
+- **Chapter 10:** Defining Classes
 
 
 ## Usage
