@@ -25,17 +25,24 @@ def make_student(info):
 def best_student():
     reader = open("chapter_10/practice_material/students.txt", "r")
 
-    best_student_obj = make_student(reader.readline())
+    best_students = []
+    best_gps = 0.0
 
-    for line in reader:
+    for (line) in reader:
         student_obj = make_student(line)
+        student_gpa = student_obj.gpa()
 
-        if student_obj.gpa() > best_student_obj.gpa():
-            best_student_obj = student_obj
+        if len(best_students) == 0 or student_gpa > best_gpa:
+            # we create a new list with the current top student
+            best_students = [student_obj]
+            best_gpa = student_gpa
+        elif student_gpa == best_gpa:
+            best_students.append(student_obj)
+    
     reader.close()
 
-    print(f"Best sudent: {best_student_obj.get_name()}\nGPA: {best_student_obj.gpa()}\nCredits: {best_student_obj.get_hours()}")
-
+    for i in best_students:
+        print(f"Best student: {i.get_name()}\nGPA: {i.gpa()}\nCredits: {i.get_hours()}")
 
 class Projectile:
     def __init__(self, angle, velocity, height):
