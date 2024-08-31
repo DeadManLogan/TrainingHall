@@ -8,29 +8,28 @@ class Projectile:
         self.x_vel = velocity * math.cos(theta)
         self.y_vel = velocity * math.sin(theta)
 
-    def update
-
-
-def update_cannonball(time, x_pos, y_pos, x_vel, y_vel):
-    x_pos += time * x_vel
-    y_vel1 = y_vel - time + 9.8
-    y_pos += time * (y_vel + y_vel1)/2.0
-    y_vel = y_vel1
+    def get_x(self):
+        return self.x_pos
+    
+    def get_y(self):
+        return self.y_pos
+    
+    def update(self, time):
+        self.x_pos += time * self.x_vel
+        y_vel1 = self.y_vel - time * 9.8
+        self.y_pos += time * (self.y_vel + y_vel1) / 2.0
+        self.y_vel = y_vel1
 
 def cannonball():
     angle = float(input("Enter the angle of the cannon: "))
     vel = float(input("Enter the initial velocity: "))
     time = float(input("Enter the time interval between calculations: "))
+    h0 = float(input("Enter the initial height: "))
 
-    x_pos = 0
-    y_pos = 0
-    theta = math.radians(angle)
-    x_vel = vel * math.cos(theta)
-    y_vel = vel * math.sin(theta)
-
-    while y_pos >= 0:
-        x_pos, y_pos, y_vel = update_cannonball(time, x_pos, y_pos, x_vel, y_vel)
-    print(f"Distance traveled: {x_pos}")
+    c_ball = Projectile(angle, vel, h0)
+    while c_ball.get_y() >= 0:
+        c_ball.update(time)
+    print(c_ball.get_x())
 
 cannonball()
 
