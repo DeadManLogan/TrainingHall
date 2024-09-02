@@ -9,20 +9,26 @@ class ShotTracker:
         self.marker.setFill("red")
         self.marker.setOutline("red")
         self.marker.draw(win)
+        self.max_height = height
 
     def update(self, dt):
         self.proj.update(dt)
-
         center = self.marker.getCenter()
         dx = self.proj.get_x() - center.getX()
         dy = self.proj.get_y() - center.getY()
         self.marker.move(dx, dy)
+
+        if self.proj.get_y() > self.max_height:
+            self.max_height = self.proj.get_y()
     
     def get_x(self):
         return self.proj.get_x()
     
     def get_y(self):
         return self.proj.get_y()
+    
+    def get_max_height(self):
+        return self.max_height
     
     def undraw(self):
         return self.marker.undraw()
@@ -94,4 +100,3 @@ def main():
             shot.update(1/50)
             update(50)
     win.close()
-main()
