@@ -27,7 +27,6 @@ def best_student():
     reader = open("chapter_10/practice_material/students.txt", "r")
 
     best_students = []
-    best_gps = 0.0
 
     for (line) in reader:
         student_obj = make_student(line)

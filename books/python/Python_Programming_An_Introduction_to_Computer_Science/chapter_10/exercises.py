@@ -1,7 +1,10 @@
 from graphics import *
+import math
 import random
 from cannon import InputDialog, ShotTracker
 from button import Button
+from exercise_material.cbutton import CButton
+from die_view import DieView, DieView2
 
 # EXERCISE 1
 def exercise_1():
@@ -210,4 +213,179 @@ def exercise_4():
     win.getMouse()
     win.close()
 
-exercise_4()
+# EXERCISE 5
+class Student:
+    def __init__(self, name, hours=0, qpoints=0):
+        self.name = name
+        self.hours = float(hours)
+        self.qpoints = float(qpoints)
+
+    def get_name(self):
+        return self.name
+    
+    def get_hours(self):
+        return self.hours
+    
+    def get_qpoints(self):
+        return self.qpoints
+    
+    def add_grade(self, grade_points, credits):
+        self.hours += grade_points
+        self.qpoints += grade_points * credits
+    
+    def gpa(self):
+        return self.qpoints / self.hours
+
+def exercise_5():
+    name = "Bob, B"
+    student = Student(name)
+
+    while True:
+        grade_points = float(input("Enter grade points (or -1 to quit): "))
+        if grade_points == -1:
+            break
+        credits = float(input("Enter credits: "))
+        student.add_grade(grade_points, credits)
+
+    print(f"GPA for {student.get_name()}: {student.gpa()}")
+
+# EXERCISE 6
+class Student2:
+    def __init__(self, name, hours=0, qpoints=0):
+        self.name = name
+        self.hours = float(hours)
+        self.qpoints = float(qpoints)
+
+    def get_name(self):
+        return self.name
+    
+    def get_hours(self):
+        return self.hours
+    
+    def get_qpoints(self):
+        return self.qpoints
+    
+    def add_grade(self, grade_points, credits):
+        self.hours += grade_points
+        self.qpoints += grade_points * credits
+    
+    def gpa(self):
+        return self.qpoints / self.hours
+    
+    def add_letter_grade(self, letterGrade, credits):
+        grade_points = self.get_grade_points(letterGrade)
+        if grade_points is not None:
+            self.add_grade(grade_points, credits)
+        else:
+            print(f"Invalid letter grade: {letterGrade}")
+
+    def get_grade_points(self, letterGrade):
+        grade_mapping = {
+            'A': 4.0,
+            'A-': 3.7,
+            'B+': 3.3,
+            'B': 3.0,
+            'B-': 2.7,
+            'C+': 2.3,
+            'C': 2.0,
+            'C-': 1.7,
+            'D+': 1.3,
+            'D': 1.0,
+            'D-': 0.7,
+            'F': 0.0
+        }
+        return grade_mapping.get(letterGrade.upper(), None)
+
+def exercise_6():
+    name = "Bob, B"
+    student = Student2(name)
+
+    while True:
+        letter_grade = input("Enter grade points (or quit): ")
+        if letter_grade.lower() == "quit":
+            break
+        credits = float(input("Enter credits: "))
+        student.add_letter_grade(letter_grade, credits)
+
+    print(f"GPA for {student.get_name()}: {student.gpa()}")
+
+# EXERCISE 7
+def click(win, roll_button, quit_button):
+    pt = win.getMouse()
+    roll_button.get_distance(pt)
+    quit_button.get_distance(pt)
+
+def exercise_7():
+    win = GraphWin("Exercise 7", 400, 400)
+    win.setCoords(0, 0, 10, 10)
+    win.setBackground("green2")
+
+    die1 = DieView(win, Point(3, 7), 2)
+    die2 = DieView(win, Point(7, 7), 2)
+    roll_button = CButton(win, Point(5, 4.5), 1.5, "Roll Dice")
+    roll_button.activate()
+    quit_button = CButton(win, Point(5, 1), 1, "Quit")
+
+    click(win, roll_button, quit_button)
+    while not quit_button.clicked():
+        if roll_button.clicked():
+            value1 = random.randrange(1, 7)
+            die1.set_value(value1)
+            value2 = random.randrange(1, 7)
+            die2.set_value(value2)
+            quit_button.activate()
+        click(win, roll_button, quit_button)
+    win.close()
+
+# EXERCISE 8
+def random_color():
+    return color_rgb(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+def exercise_8():
+    win = GraphWin("Exercise 8", 400, 400)
+    win.setCoords(0, 0, 10, 10)
+    win.setBackground("green2")
+
+    die1 = DieView2(win, Point(3, 7), 2)
+    die2 = DieView2(win, Point(7, 7), 2)
+    roll_button = CButton(win, Point(5, 4.5), 1.5, "Roll Dice")
+    roll_button.activate()
+    quit_button = CButton(win, Point(5, 1), 1, "Quit")
+
+    click(win, roll_button, quit_button)
+    while not quit_button.clicked():
+        if roll_button.clicked():
+            value1 = random.randrange(1, 7)
+            die1.set_value(value1)
+            die1.set_color(random_color())
+            value2 = random.randrange(1, 7)
+            die2.set_value(value2)
+            die2.set_color(random_color())
+            quit_button.activate()
+        click(win, roll_button, quit_button)
+    win.close()
+
+# EXERCISE 9
+class Sphere:
+    def __init__(self, radius):
+        self.radius = radius
+    
+    def get_radius(self):
+        return self.radius
+    
+    def surface_area(self):
+        self.area = 4 * math.pi * (self.radius ** 2)
+        return self.area
+    
+    def volume(self):
+        self.volume = 4/3 * math.pi * (self.radius ** 3)
+        return self.volume
+
+def exercise_9():
+    radius = float(input("Enter the radius of the sphere: "))
+
+    sphere = Sphere(radius)
+
+    print(f"Area: {sphere.surface_area()}\nVolume: {sphere.volume()}")
+
+exercise_9()
