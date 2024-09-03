@@ -1,4 +1,5 @@
 from graphics import *
+import random
 from cannon import InputDialog, ShotTracker
 from button import Button
 
@@ -34,14 +35,6 @@ def exercise_1():
 # EXERCISE 2
 class StartStop:
     def __init__(self, win):
-        # self.win = win = GraphWin("Buttons", 200, 300)
-        # win.setCoords(0, 4.5, 4, 0.5)
-
-        # self.start_button = Button(win, Point(1, 4), 1.25, 0.5, "Start")
-        # self.start_button.activate()
-
-        # self.stop_button = Button(win, Point(3, 4), 1.25, 0.5, "Stop")
-        # self.stop_button.activate()
         self.win = win
 
         self.start_button = Button(win, Point(100, 100), 100, 50, "Start")
@@ -84,4 +77,137 @@ def exercise_2():
         else:
             pt = win.getMouse()
     win.close()
-exercise_2()
+
+# EXERCISE 3
+class DoorButtons:
+    def __init__(self, win):
+        self.win = win
+
+        self.door1 = Button(win, Point(2, 8), 2, 2, "Door 1")
+        self.door1.activate()
+
+        self.door2 = Button(win, Point(5, 8), 2, 2, "Door 2")
+        self.door2.activate()
+
+        self.door3 = Button(win, Point(8, 8), 2, 2, "Door 3")
+        self.door3.activate()
+
+        self.winner = random.randint(0, 2)
+        self.wins = self.losses = 0
+
+    def won(self):
+        self.wins += 1
+
+    def lost(self):
+        self.losses += 1
+    
+    def score(self):
+        return self.wins, self.losses
+    
+    def pick_door(self):
+        self.winner = random.randint(0, 2)
+    
+    def get_winning_door(self):
+        if self.winner == 0:
+            return "Door 1"
+        if self.winner == 1:
+            return "Door 2"
+        if self.winner == 2:
+            return "Door 3"
+
+    def interact(self, pt):
+        if self.door1.clicked(pt):
+            return "Door 1"
+        if self.door2.clicked(pt):
+            return "Door 2"
+        if self.door3.clicked(pt):
+            return "Door 3"
+
+def exercise_3():
+    win = GraphWin("Exercise 3", 500, 500)
+    win.setCoords(0, 0, 10, 10)
+
+    buttons = DoorButtons(win)
+    pt = win.getMouse()
+    clicked_door = ""
+
+    while True:
+        if buttons.interact(pt) == "Door 1":
+            clicked_door = "Door 1"
+            break
+        elif buttons.interact(pt) == "Door 2":
+            clicked_door = "Door 2"
+            break
+        elif buttons.interact(pt) == "Door 3":
+            clicked_door = "Door 3"
+            break
+        else:
+            pt = win.getMouse()
+
+    if buttons.get_winning_door() == clicked_door:
+        result = Text(Point(5, 3), "You won!!")
+        result.draw(win)
+    else:
+        result = Text(Point(5, 3), f"You lost...{buttons.get_winning_door()} was the right one.")
+        result.draw(win)
+            
+    win.getMouse()
+    win.close()
+
+# EXERCISE 4
+class QuitButton:
+    def __init__(self, win):
+        self.win = win
+
+        self.quit_button = Button(win, Point(5, 5), 2, 2, "Quit")
+        self.quit_button.activate()
+
+    def quit(self, pt):
+        if self.quit_button.clicked(pt):
+            return True
+
+
+def get_door(win, buttons, pt, quit):
+    while True:
+        if buttons.interact(pt) == "Door 1":
+            return "Door 1"
+        elif buttons.interact(pt) == "Door 2":
+            return "Door 2"
+        elif buttons.interact(pt) == "Door 3":
+            return "Door 3"
+        elif quit:
+            win.close()
+        else:
+            pt = win.getMouse()
+
+def exercise_4():
+    win = GraphWin("Exercise 3", 500, 500)
+    win.setCoords(0, 0, 10, 10)
+
+    buttons = DoorButtons(win)
+    quit = QuitButton(win)
+    pt = win.getMouse()
+
+    while not quit.quit(pt):
+        clicked_door = get_door(win, buttons, pt, quit.quit(pt))
+
+        if buttons.get_winning_door() == clicked_door:
+            result = Text(Point(5, 3), "You won!!")
+            result.draw(win)
+            buttons.won()
+        else:
+            result = Text(Point(5, 3), f"You lost...{buttons.get_winning_door()} was the right one.")
+            result.draw(win)
+            buttons.lost()
+        pt = win.getMouse()
+        buttons.pick_door()
+        result.undraw()
+
+    wins, losses = buttons.score()
+    score = Text(Point(5, 2), f"Wins: {wins}\nLosses: {losses}")
+    score.draw(win)
+
+    win.getMouse()
+    win.close()
+
+exercise_4()
