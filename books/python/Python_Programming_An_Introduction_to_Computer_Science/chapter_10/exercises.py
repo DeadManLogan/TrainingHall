@@ -378,8 +378,8 @@ class Sphere:
         return self.area
     
     def volume(self):
-        self.volume = 4/3 * math.pi * (self.radius ** 3)
-        return self.volume
+        self.sphere_volume = 4/3 * math.pi * (self.radius ** 3)
+        return self.sphere_volume
 
 def exercise_9():
     radius = float(input("Enter the radius of the sphere: "))
@@ -388,4 +388,25 @@ def exercise_9():
 
     print(f"Area: {sphere.surface_area()}\nVolume: {sphere.volume()}")
 
-exercise_9()
+# EXERCISE 10
+class Cube:
+    def __init__(self, side):
+        self.side = side
+    
+    def get_side(self):
+        return self.side
+    
+    def get_surface_area(self):
+        self.area = 6 * (self.side ** 2)
+        return self.area
+    
+    def get_volume(self):
+        self.volume = self.side ** 3
+        return self.volume
+
+def exercise_10():
+    side = float(input("Enter the side of the cube: "))
+    cube = Cube(side)
+    print(f"Area: {cube.get_surface_area()}\nVolume: {cube.get_volume()}")
+
+exercise_10()
