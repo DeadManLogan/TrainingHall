@@ -451,6 +451,18 @@ class Card:
             suit_name = "Spades"
 
         return f"{name} of {suit_name}"
+    
+    def draw(self, win, center):
+        suit_mapping = {
+            'd': 'diamonds',
+            'c': 'clubs',
+            'h': 'hearts',
+            's': 'spades'
+        }
+        suit_name = suit_mapping[self.suit]
+        filename = f"chapter_10/exercise_material/{self.rank}_{suit_name}.ppm"
+        card_image = Image(center, filename)
+        card_image.draw(win)
         
 def exercise_11():
     com = ""
@@ -463,5 +475,101 @@ def exercise_11():
 
         com = input("Type quit to quit: ")
     
+# EXERCISE 12
+def create_random_hand():
+    suits = ['d', 'c', 'h', 's']
+    ranks = list(range(1, 14))
+    hand = []
 
-exercise_11()
+    for _ in range(5):
+        rank = random.choice(ranks)
+        suit = random.choice(suits)
+        hand.append(Card(rank, suit))
+    
+    return hand
+
+def exercise_12():
+    """
+    I only put 3 cards. You can easily put the randomness in play, but you also
+    need to manually import all 52 card assets. Feel free to use the create_random_hand
+    function from above.
+    """
+    rank = input("Enter the rank of the card: ")
+    suit = input("Enter the suit d, c, h, s: ")
+
+    win = GraphWin("Card Hand", 800, 600)
+    win.setBackground("white")
+
+    card = Card(rank, suit)
+    card.draw(win, Point(250, 300))
+
+    win.getMouse()
+    win.close()
+
+# EXERCISE 15
+def exercise_15():
+    win = GraphWin("Exercise 15", 640, 480, autoflush=False)
+    win.setCoords(-10, -10, 210, 155)
+
+    Line(Point(-10, 0), Point(210, 0)).draw(win)
+
+    for x in range(0, 210, 50):
+        Text(Point(x, -5), str(x)).draw(win)
+        Line(Point(x, 0), Point(x, 2)).draw(win)
+
+    angle, vel, height = 45, 40, 2
+    inputwin = InputDialog(angle, vel, height)
+    while True:
+        choice = inputwin.interact()
+
+        if choice == "Quit":
+            break
+
+        angle, vel, height = inputwin.get_values()
+        shot = ShotTracker(win, angle, vel, height)
+
+        while 0 <= shot.get_y() and -10 < shot.get_x() <= 210:
+            shot.update(1/50)
+            update(50)
+        print(f"Max Height: {shot.get_max_height()}")
+    win.close()
+
+# EXERCISE 16
+class Target:
+    def __init__(self, win):
+        self.p1 = Point(random.uniform(-8, 180), 0)
+        self.p2 = Point(random.uniform(-6, 200), 3)
+        random_num = random.uniform(1, 3)
+        self.target = Rectangle(self.p1, self.p2)
+        self.target.draw(win)
+
+def exercise_16():
+    win = GraphWin("Exercise 16", 640, 480, autoflush=False)
+    win.setCoords(-10, -10, 210, 155)
+
+    Line(Point(-10, 0), Point(210, 0)).draw(win)
+
+    for x in range(0, 210, 50):
+        Text(Point(x, -5), str(x)).draw(win)
+        Line(Point(x, 0), Point(x, 2)).draw(win)
+    
+    target = Target(win)
+
+    angle, vel, height = 45, 40, 2
+    inputwin = InputDialog(angle, vel, height)
+    while True:
+        choice = inputwin.interact()
+
+        if choice == "Quit":
+            break
+
+        angle, vel, height = inputwin.get_values()
+        shot = ShotTracker(win, angle, vel, height)
+
+        while 0 <= shot.get_y() and -10 < shot.get_x() <= 210:
+            shot.update(1/50)
+            update(50)
+        print(f"Max Height: {shot.get_max_height()}")
+    win.close()
+
+exercise_16()
