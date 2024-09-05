@@ -409,4 +409,59 @@ def exercise_10():
     cube = Cube(side)
     print(f"Area: {cube.get_surface_area()}\nVolume: {cube.get_volume()}")
 
-exercise_10()
+# EXERCISE 11
+class Card:
+    def __init__(self, rank, suit):
+        self.rank = int(rank)
+        self.suit = suit
+
+    def get_rank(self):
+        return self.rank
+    
+    def get_suit(self):
+        return self.suit
+    
+    def value(self):
+        if self.rank < 11:
+            return self.rank
+        else:
+            return 10
+        
+    def __str__(self):
+        name = ""
+        suit_name = ""
+        if self.rank == 1:
+            name = "Ace"
+        elif self.rank == 11:
+            name = "Jack"
+        elif self.rank == 12:
+            name = "Queen"
+        elif self.rank == 13:
+            name = "King"
+        else:
+            name = self.rank
+
+        if self.suit == "d":
+            suit_name = "Diamonds"
+        elif self.suit == "c":
+            suit_name = "Clubs"
+        elif self.suit == "h":
+            suit_name = "Hearts"
+        else:
+            suit_name = "Spades"
+
+        return f"{name} of {suit_name}"
+        
+def exercise_11():
+    com = ""
+    while com != "quit":
+        rank = input("Enter the rank of the card: ")
+        suit = input("Enter the suit d, c, h, s: ")
+
+        card = Card(rank, suit)
+        print(card)
+
+        com = input("Type quit to quit: ")
+    
+
+exercise_11()
