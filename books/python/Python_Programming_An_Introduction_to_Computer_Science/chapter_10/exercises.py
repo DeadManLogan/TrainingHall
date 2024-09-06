@@ -572,4 +572,81 @@ def exercise_16():
         print(f"Max Height: {shot.get_max_height()}")
     win.close()
 
-exercise_16()
+# EXERCISE 17
+class Regression:
+    def __init__(self):
+        self.n = 0
+        self.sum_x = 0
+        self.sum_y = 0
+        self.sum_x2 = 0
+        self.sum_xy = 0
+
+    def addPoint(self, x, y):
+        self.n += 1
+        self.sum_x += x
+        self.sum_y += y
+        self.sum_x2 += x ** 2
+        self.sum_xy += x * y
+
+    def slope(self):
+        if self.n == 0:
+            return 0
+        return (self.n * self.sum_xy - self.sum_x * self.sum_y) / (self.n * self.sum_x2 - self.sum_x ** 2)
+
+    def intercept(self):
+        if self.n == 0:
+            return 0
+        return (self.sum_y - self.slope() * self.sum_x) / self.n
+
+    def predict(self, x):
+        return self.slope() * x + self.intercept()
+
+def exercise_17():
+    # Create a graphics window
+    win = GraphWin("Regression Line Plotter", 600, 400)
+    win.setBackground("white")
+
+    # Draw the "Done" rectangle
+    done_rect = Rectangle(Point(10, 10), Point(60, 30))
+    done_rect.setFill("lightgray")
+    done_rect.draw(win)
+    done_text = Text(Point(35, 20), "Done")
+    done_text.draw(win)
+
+    # Create a Regression object
+    regression = Regression()
+
+    # Collect points until "Done" is clicked
+    while True:
+        click_point = win.getMouse()
+
+        # Check if the click is inside the "Done" rectangle
+        if (10 <= click_point.getX() <= 60) and (10 <= click_point.getY() <= 30):
+            break
+
+        # Add the point to the regression object
+        regression.addPoint(click_point.getX(), click_point.getY())
+
+        # Draw the point
+        point_circle = Circle(click_point, 3)
+        point_circle.setFill("blue")
+        point_circle.setOutline("blue")
+        point_circle.draw(win)
+
+    # Calculate the regression line endpoints
+    x_left = 0
+    y_left = regression.predict(x_left)
+    x_right = win.getWidth()
+    y_right = regression.predict(x_right)
+
+    # Draw the regression line
+    regression_line = Line(Point(x_left, y_left), Point(x_right, y_right))
+    regression_line.setOutline("red")
+    regression_line.setWidth(2)
+    regression_line.draw(win)
+
+    # Wait for another click before closing
+    win.getMouse()
+    win.close()
+
+exercise_17()
