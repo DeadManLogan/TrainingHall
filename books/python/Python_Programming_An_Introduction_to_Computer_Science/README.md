@@ -11,6 +11,9 @@ This repository contains solutions to programming exercises from the book "Pytho
 - **Chapter 8:** Loop Structures & Booleans
 - **Chapter 9:** Simulation and Design
 - **Chapter 10:** Defining Classes
+- **Chapter 11:** Data Collections
+- **Chapter 12:** Object-Oriented Design
+- **Chapter 13:** Algorithm Design and Recursion
 
 
 ## Usage
