@@ -30,7 +30,7 @@ def read_students():
     return students
 
 def write_studetns(students):
-    filename = "output.txt"
+    filename = "chapter_11/practice_material/output.txt"
     writer = open(filename, "w")
     for (s) in students:
         print(f"{s.get_name()}\n{s.get_hours()}\n{s.get_qpoints()}", file=writer)
@@ -39,23 +39,10 @@ def write_studetns(students):
 def use_gpa(a_student):
     return a_student.gpa()
     
-def best_student():
-    reader = open("chapter_10/practice_material/students.txt", "r")
+def main():
+    data = read_students()
+    data.sort(key=Student.gpa)
 
-    best_students = []
+    write_studetns(data)
 
-    for (line) in reader:
-        student_obj = make_student(line)
-        student_gpa = student_obj.gpa()
-
-        if len(best_students) == 0 or student_gpa > best_gpa:
-            # we create a new list with the current top student
-            best_students = [student_obj]
-            best_gpa = student_gpa
-        elif student_gpa == best_gpa:
-            best_students.append(student_obj)
-    
-    reader.close()
-
-    for i in best_students:
-        print(f"Best student: {i.get_name()}\nGPA: {i.gpa()}\nCredits: {i.get_hours()}")
+main()
