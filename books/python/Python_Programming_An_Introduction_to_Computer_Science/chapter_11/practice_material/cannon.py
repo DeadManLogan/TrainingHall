@@ -1,6 +1,26 @@
 from graphics import *
-from practice import Projectile
+import math
 from button import Button
+
+class Projectile:
+    def __init__(self, angle, velocity, height):
+        self.x_pos = 0.0
+        self.y_pos = height
+        theta = math.radians(angle)
+        self.x_vel = velocity * math.cos(theta)
+        self.y_vel = velocity * math.sin(theta)
+
+    def get_x(self):
+        return self.x_pos
+    
+    def get_y(self):
+        return self.y_pos
+    
+    def update(self, time):
+        self.x_pos += time * self.x_vel
+        y_vel1 = self.y_vel - time * 9.8
+        self.y_pos += time * (self.y_vel + y_vel1) / 2.0
+        self.y_vel = y_vel1
 
 class ShotTracker:
     def __init__(self, win, angle, velocity, height):
@@ -100,5 +120,3 @@ def main():
             shot.update(1/50)
             update(50)
     win.close()
-
-main()
