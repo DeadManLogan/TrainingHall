@@ -21,7 +21,7 @@ def make_student(info):
     return Student(info[0], info[1], info[2])
 
 def read_students():
-    filename = "chapter_11/exercise_material/exercise_8/students_8.txt"
+    filename = "chapter_11/exercise_material/exercise_9/students_9.txt"
     reader = open(filename, "r")
     students = []
     for (line) in reader:
