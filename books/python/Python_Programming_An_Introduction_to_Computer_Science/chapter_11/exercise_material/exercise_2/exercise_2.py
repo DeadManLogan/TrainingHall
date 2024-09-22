@@ -22,7 +22,7 @@ def make_student(info):
 
 def read_students():
     filename = "chapter_11/exercise_material/exercise_2/students_2.txt"
-    reader = open(filename, "r")
+    reader = (filename, "r")
     students = []
     for (line) in reader:
         students.append(make_student(line))
