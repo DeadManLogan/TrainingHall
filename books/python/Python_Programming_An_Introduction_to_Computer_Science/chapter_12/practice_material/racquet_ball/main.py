@@ -1,9 +1,32 @@
+from random import *
+
 class RBallGame:
-    def play():
-        return
+    def __init__(self,probA, probB):
+        self.playerA = Player(probA)
+        self.playerB = Player(probB)
+        self.server = self.playerA
+
+    def play(self):
+        while not self.is_over():
+            if self.server.wins_serve():
+                self.server.increase_score()
+            else:
+                self.change_server()
     
     def get_scores(self):
-        return
+        return self.playerA.get_score(), self.playerB.get_score()
+    
+    def is_over(self):
+        a, b = self.get_scores()
+        return a == 15 or b == 15 or \
+            (a == 7 and b == 0) or (b == 7 and a == 0)
+    
+    def change_server(self):
+        if self.server == self.playerA:
+            self.server = self.playerB
+        else:
+            self.server = self.playerA
+
 
 class SimStats:
     def __init__(self):
@@ -38,9 +61,26 @@ class SimStats:
         print("---------------------------------------")
         self.print_line("A", self.winsA, self.shutoutsA, ngames)
         self.print_line("A", self.winsB, self.shutoutsB, ngames)
+
+class Player:
+    def __init__(self, prob):
+        self.prob = prob
+        self.score = 0
+
+    def wins_serve(self):
+        return random() < self.prob
+    
+    def increase_score(self):
+        self.score += 1
+
+    def get_score(self):
+        return self.score
     
 def get_inputs():
-    return
+    a = float(input("Player A probability: "))
+    b = float(input("Player B probability: "))
+    n = int(input("Number of games: "))
+    return a, b, n
 
 def main():
     probA, probB, n = get_inputs()
@@ -52,3 +92,6 @@ def main():
         stats.update(the_game)
 
     stats.print_report()
+
+if __name__ == "__main__":
+    main()
