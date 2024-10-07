@@ -1,5 +1,4 @@
 from dice import Dice
-from poker_interface import TextInterface
 
 class PokerApp:
     def __init__(self, interface):
