@@ -1,4 +1,4 @@
-from chapter_11.practice_material.graphics import *
+from graphics import *
 
 class DieView:
     def __init__(self, win, center, size):

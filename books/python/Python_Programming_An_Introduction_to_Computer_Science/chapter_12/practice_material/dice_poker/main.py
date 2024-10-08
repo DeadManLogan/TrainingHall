@@ -1,8 +1,8 @@
 from poker_app import PokerApp
-from poker_interface import TextInterface
+from poker_interface import TextInterface, GraphicsInterface
 
 def main():
-    inter = TextInterface()
+    inter = GraphicsInterface()
     app = PokerApp(inter)
     app.run()
 

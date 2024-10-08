@@ -50,7 +50,7 @@ class GraphicsInterface:
         self.msg.draw(self.win)
         self.create_dice(Point(300, 100), 75)
         self.buttons = []
-        self.add_dice_buttons(Point(300, 170), 75, 30)
+        self.add_dice_button(Point(300, 170), 75, 30)
         b = Button(self.win, Point(300, 230), 400, 40, "Roll Dice")
         self.buttons.append(b)
         b = Button(self.win, Point(300, 280), 150, 40, "Score")
@@ -80,6 +80,20 @@ class GraphicsInterface:
     def set_money(self, amount):
         self.money.setText(f"${amount}")
 
+    def choose(self, choices):
+        buttons = self.buttons
+        for b in buttons:
+            if b.get_label() in choices:
+                b.activate()
+            else:
+                b.deactivate()
+
+        while True:
+            p = self.win.getMouse()
+            for b in buttons:
+                if b.clicked(p):
+                    return b.get_label()
+
     def show_result(self, msg, score):
         if score > 0:
             text = f"{msg}! You win {score}"
@@ -90,3 +104,32 @@ class GraphicsInterface:
     def set_dice(self, values):
         for i in range(5):
             self.dice[i].set_value(values[i])
+
+    def want_to_play(self):
+        ans = self.choose(["Roll Dice", "Quit"])
+        self.msg.setText("")
+        return ans == "Roll Dice"
+    
+    def choose_dice(self):
+        choices = []
+        while True:
+            b = self.choose(["Die 1", "Die 2", "Die 3", "Die 4", "Die 5", "Roll Dice", "Quit"])
+
+            if b[0] == "D":
+                i = int(b[4]) - 1
+                if i in choices:
+                    choices.remove(i)
+                    self.dice[i].set_color("black")
+                else:
+                    choices.append(i)
+                    self.dice[i].set_color("gray")
+            else:
+                for d in self.dice:
+                    d.set_color("black")
+                if b == "Score":
+                    return []
+                elif choices != []:
+                    return choices
+                
+    def close(self):
+        self.win.close()
