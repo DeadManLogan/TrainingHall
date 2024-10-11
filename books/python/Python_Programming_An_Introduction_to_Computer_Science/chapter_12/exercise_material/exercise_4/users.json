@@ -1,14 +1,20 @@
-[
-    {
-        "name": "bob",
+{
+    "user123": {
+        "user_id": "user123",
         "pin": "1234",
-        "checking": 500,
-        "savings": 1000
+        "checking_balance": 1000.50,
+        "savings_balance": 2500.75
     },
-    {  
-        "name": "alice",
+    "user456": {
+        "user_id": "user456",
         "pin": "5678",
-        "checking": 1000,
-        "savings": 2000
+        "checking_balance": 150.00,
+        "savings_balance": 600.25
+    },
+    "user789": {
+        "user_id": "user789",
+        "pin": "7890",
+        "checking_balance": 500.00,
+        "savings_balance": 1000.00
     }
-]
+}
