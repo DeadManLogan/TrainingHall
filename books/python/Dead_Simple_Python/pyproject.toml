@@ -1,0 +1,21 @@
+[project]
+name = "code"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "DeadManLogan", email = "grigoroudisdimosthenis@gmail.com"},
+]
+dependencies = ["ruff>=0.7.3"]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "C90"]
+ignore = ["E501"]  # Example: Ignore line length errors
+exclude = ["tests/", ".git/", "__pycache__/"]
