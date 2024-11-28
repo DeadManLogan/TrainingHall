@@ -16,6 +16,6 @@ distribution = false
 
 [tool.ruff]
 line-length = 88
-select = ["E", "F", "W", "C90"]
-ignore = ["E501"]  # Example: Ignore line length errors
+lint.select = ["E", "F", "W", "C90"]
+lint.ignore = ["E501"]  # Example: Ignore line length errors
 exclude = ["tests/", ".git/", "__pycache__/"]
