@@ -1,4 +1,0 @@
-3
-Student1 100
-Student2 75
-Student3 50
