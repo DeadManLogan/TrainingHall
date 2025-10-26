@@ -35,18 +35,30 @@ def validate_transaction(func):
         return func(self, amount, *args, **kwargs)
     return wrapper
 
+def limit_large_transactions(max_amount):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(self, amount, *args, **kwargs):
+            if amount > max_amount:
+                raise ValueError("You overcame the maximum transaction amount. Try with smaller amount.")
+            return func(self, amount, *args, **kwargs)
+        return wrapper
+    return decorator
+
 
 class BankAccount:
     def __init__(self, owner, balance=0):
         self.owner = owner
         self.balance = balance
    
+    @limit_large_transactions(10000)
     @time_transaction
     @validate_transaction
     @log_transaction
     def deposit(self, amount):
         self.balance += amount
 
+    @limit_large_transactions(10000)
     @time_transaction
     @validate_transaction
     @log_transaction
@@ -55,9 +67,7 @@ class BankAccount:
 
 b = BankAccount(owner="Banker")
 print(b.balance)
-b.deposit(10)
+b.deposit(15000)
 print(b.balance)
-b.withdraw(2)
-print(b.balance)
-b.withdraw(12)
+b.withdraw(20000)
 print(b.balance)
