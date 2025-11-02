@@ -1,0 +1,7 @@
+2025-11-01 09:15:22 INFO Server started successfully
+2025-11-01 09:16:03 WARN Disk space low
+2025-11-01 09:17:45 ERROR Database connection failed
+2025-11-01 09:18:10 INFO User login: alice
+2025-11-01 09:19:33 ERROR Timeout while fetching data
+2025-11-01 09:20:00 WARN High memory usage detected
+2025-11-01 09:21:11 INFO Scheduled backup completed
