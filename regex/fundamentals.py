@@ -29,9 +29,30 @@ import re
 #     print(row.group(1))
 
 
-# ASSERTIONS
-text = "USD100 EUR200 USD300 JPY400"
-# 🎯 Expected result: ['100', '300']
-pattern = r"(?<=USD)\d+"
-result = re.findall(pattern, text)
+# # ASSERTIONS
+# text = "USD100 EUR200 USD300 JPY400"
+# # 🎯 Expected result: ['100', '300']
+# pattern = r"(?<=USD)\d+"
+# result = re.findall(pattern, text)
+# print(result)
+
+
+# CONDITIONAL
+'''
+(?: ... ) → non-capturing group, to combine the two branches cleanly.
+
+VIP-\d{6} → matches VIP IDs with exactly 6 digits.
+
+(?!VIP-)\b\w{3}-\d{4}\b → matches non-VIP IDs:
+
+(?!VIP-) → negative lookahead ensures it’s not VIP.
+
+\w{3}-\d{4} → matches 3-letter prefix + 4-digit number.
+
+\b → word boundaries to avoid partial matches.
+'''
+ids = "VIP-123456 REG-1234 REG-12345 VIP-1234"
+pattern = r"(?:VIP-\d{6}|(?!VIP-)\b\w{3}-\d{4}\b)"
+result = re.findall(pattern, ids)
 print(result)
+
