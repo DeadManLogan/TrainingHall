@@ -15,15 +15,23 @@ import re
 # print(result)
 
 
-# FLAGS
-log = """
-ERROR: 404 - Not Found
-info: ready
-error: 500 - Timeout
-Debug: done
-"""
+# # FLAGS
+# log = """
+# ERROR: 404 - Not Found
+# info: ready
+# error: 500 - Timeout
+# Debug: done
+# """
 
-# 🎯 Expected result: ['404', '500']
-pattern = re.compile(r"error:\s*(\d+)", re.I)
-for row in pattern.finditer(log):
-    print(row.group(1))
+# # 🎯 Expected result: ['404', '500']
+# pattern = re.compile(r"error:\s*(\d+)", re.I)
+# for row in pattern.finditer(log):
+#     print(row.group(1))
+
+
+# ASSERTIONS
+text = "USD100 EUR200 USD300 JPY400"
+# 🎯 Expected result: ['100', '300']
+pattern = r"(?<=USD)\d+"
+result = re.findall(pattern, text)
+print(result)
