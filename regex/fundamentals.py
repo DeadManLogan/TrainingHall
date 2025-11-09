@@ -1,7 +1,17 @@
 import re
 
-log = "Users: A123, b456, C789, D12E, E000"
-# Desired result: ['A123', 'C789', 'E000']
-pattern = r"[A-Z]\d{3}"
-print(re.findall(pattern, log))
+# DUPLICATED WORDS
+text = "hello hello world world test"
+# 🎯 Expected result: ['hello', 'world']
+'''
+(\b\w+) → captures a full word (letters, digits, or underscore) with a word boundary before it.
+
+\s+ → allows any whitespace (space, tab, etc.) between words.
+
+\1 → reuses the exact word captured by the first group.
+'''
+pattern = r"(\b\w+)\s+\1"
+result = re.findall(pattern, text)
+print(result)
+
 
