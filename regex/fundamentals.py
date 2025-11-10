@@ -57,22 +57,19 @@ import re
 # print(result)
 
 
+# COMPILATION
+logs = [
+    "INFO 200 - OK",
+    "ERROR 500 - Internal Server Error",
+    "WARNING 404 - Not Found",
+    "ERROR 403 - Forbidden"
+]
 
+pattern = re.compile(r"Error (\d+)", re.I)
+for item in logs:
+    match = pattern.search(item)
+    if match:
+        print(match.group(1))
 
-pattern = r"""
-^                 # start of string
-(?=.*[A-Z])       # at least one uppercase
-(?=.*\d)          # at least one digit
-(?=.*[!@#$%^&*])  # at least one special char
-[A-Za-z\d!@#$%^&*]{8,}  # min length 8
-$                 # end of string
-"""
-
-passwords = ["Pass123!", "weakpass", "Strong#1", "NoSpecial1"]
-
-compiled = re.compile(pattern, re.X)
-valid_passwords = [p for p in passwords if compiled.match(p)]
-print(valid_passwords)
-# Output: ['Pass123!', 'Strong#1']
 
 
