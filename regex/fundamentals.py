@@ -57,19 +57,16 @@ import re
 # print(result)
 
 
-# COMPILATION
-logs = [
-    "INFO 200 - OK",
-    "ERROR 500 - Internal Server Error",
-    "WARNING 404 - Not Found",
-    "ERROR 403 - Forbidden"
-]
+# # COMPILATION
+# logs = [
+#     "INFO 200 - OK",
+#     "ERROR 500 - Internal Server Error",
+#     "WARNING 404 - Not Found",
+#     "ERROR 403 - Forbidden"
+# ]
 
-pattern = re.compile(r"Error (\d+)", re.I)
-for item in logs:
-    match = pattern.search(item)
-    if match:
-        print(match.group(1))
-
-
-
+# pattern = re.compile(r"Error (\d+)", re.I)
+# for item in logs:
+#     match = pattern.search(item)
+#     if match:
+#         print(match.group(1))
