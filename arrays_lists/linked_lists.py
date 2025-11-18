@@ -12,6 +12,16 @@ class LinkedList:
         new_node.next = self.head
         self.head = new_node
 
+    def insert_at_tail(self, value):
+        new_node = Node(value)
+        if not self.head:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+
     def print_list(self):
         head = self.head
         current = head
@@ -23,6 +33,7 @@ class LinkedList:
 linked1 = LinkedList()
 linked1.insert_at_head(10)
 linked1.insert_at_head(20)
-linked1.insert_at_head(30)
+linked1.insert_at_tail(30)
+linked1.insert_at_tail(40)
 
 linked1.print_list()
