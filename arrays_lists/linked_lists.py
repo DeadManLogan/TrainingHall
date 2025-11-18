@@ -29,11 +29,32 @@ class LinkedList:
             print(current.value)
             current = current.next
 
+    def delete_value(self, target):
+        if not self.head:
+            return
+    
+        # special case: delete the head
+        if self.head.value == target:
+            self.head = self.head.next
+            return
+
+        prev = None
+        curr = self.head
+
+        while curr:
+            if curr.value == target:
+                prev.next = curr.next
+                return
+            prev = curr
+            curr = curr.next
+
 
 linked1 = LinkedList()
 linked1.insert_at_head(10)
 linked1.insert_at_head(20)
 linked1.insert_at_tail(30)
 linked1.insert_at_tail(40)
+
+linked1.delete_value(10)
 
 linked1.print_list()
