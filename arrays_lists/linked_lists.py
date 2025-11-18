@@ -48,6 +48,19 @@ class LinkedList:
             prev = curr
             curr = curr.next
 
+    def reverse(self):
+        prev = None
+        curr = self.head
+
+        while curr:
+            next_node = curr.next     # save next node
+            curr.next = prev          # reverse pointer
+            prev = curr               # move prev forward
+            curr = next_node          # move curr forward
+
+        self.head = prev
+
+
 
 linked1 = LinkedList()
 linked1.insert_at_head(10)
@@ -55,6 +68,7 @@ linked1.insert_at_head(20)
 linked1.insert_at_tail(30)
 linked1.insert_at_tail(40)
 
-linked1.delete_value(10)
+# linked1.delete_value(10)
+linked1.reverse()
 
 linked1.print_list()
