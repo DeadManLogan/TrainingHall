@@ -72,16 +72,26 @@ class LinkedList:
                 return True  # cycle detected
 
         return False  # no cycle
+    
+    def nth_from_end(self, n):
+        fast = self.head
+        slow = self.head
+        for i in range(n):
+            fast = fast.next
+        while fast:
+            fast = fast.next
+            slow = slow.next
+        return slow.value
 
 
+linked = LinkedList()
+linked.insert_at_tail(10)
+linked.insert_at_tail(20)
+linked.insert_at_tail(30)
+linked.insert_at_tail(40)
+linked.insert_at_tail(50)
+linked.print_list()
 
-
-linked1 = LinkedList()
-linked1.insert_at_head(10)
-linked1.insert_at_head(20)
-linked1.insert_at_tail(30)
-linked1.insert_at_tail(40)
-
-linked1.head.next = linked1.head
-
-print(linked1.has_cycle())
+print(linked.nth_from_end(2))
+print(linked.nth_from_end(5))
+print(linked.nth_from_end(1))
