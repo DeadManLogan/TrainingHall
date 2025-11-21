@@ -60,6 +60,20 @@ class LinkedList:
 
         self.head = prev
 
+    def has_cycle(self):
+        slow = self.head
+        fast = self.head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+            if slow is fast:
+                return True  # cycle detected
+
+        return False  # no cycle
+
+
 
 
 linked1 = LinkedList()
@@ -68,7 +82,6 @@ linked1.insert_at_head(20)
 linked1.insert_at_tail(30)
 linked1.insert_at_tail(40)
 
-# linked1.delete_value(10)
-linked1.reverse()
+linked1.head.next = linked1.head
 
-linked1.print_list()
+print(linked1.has_cycle())
