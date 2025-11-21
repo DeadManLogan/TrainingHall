@@ -82,6 +82,14 @@ class LinkedList:
             fast = fast.next
             slow = slow.next
         return slow.value
+    
+    def find_middle(self):
+        slow = self.head
+        fast = self.head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow.value
 
 
 linked = LinkedList()
@@ -89,9 +97,6 @@ linked.insert_at_tail(10)
 linked.insert_at_tail(20)
 linked.insert_at_tail(30)
 linked.insert_at_tail(40)
-linked.insert_at_tail(50)
 linked.print_list()
 
-print(linked.nth_from_end(2))
-print(linked.nth_from_end(5))
-print(linked.nth_from_end(1))
+print(linked.find_middle())
