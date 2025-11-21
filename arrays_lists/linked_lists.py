@@ -90,13 +90,41 @@ class LinkedList:
             slow = slow.next
             fast = fast.next.next
         return slow.value
+    
+    def remove_duplicates(self):
+        if not self.head:
+            return
+        seen = set()
+        curr = self.head
+        prev = None
+
+        while curr:
+            if curr.value in seen:
+                prev.next = curr.next   # delete node
+            else:
+                seen.add(curr.value)
+                prev = curr
+            curr = curr.next
+
+    def remove_duplicates_no_buffer(self):
+        curr = self.head
+        while curr:
+            runner = curr
+            while runner.next:
+                if runner.next.value == curr.value:
+                    runner.next = runner.next.next  # delete
+                else:
+                    runner = runner.next
+            curr = curr.next
+
 
 
 linked = LinkedList()
 linked.insert_at_tail(10)
 linked.insert_at_tail(20)
-linked.insert_at_tail(30)
-linked.insert_at_tail(40)
+linked.insert_at_tail(20)
+linked.insert_at_tail(10)
 linked.print_list()
 
-print(linked.find_middle())
+print(linked.remove_duplicates_no_buffer())
+linked.print_list()
